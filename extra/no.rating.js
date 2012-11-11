@@ -14,9 +14,14 @@ d3.addModule(
 	{
 		with(this.config)
 		{
-			if(postRating.value    || d3.page.inbox) $j('.post .vote_result').html('');
-			if(commentRating.value || d3.page.inbox) $j('.c_vote .vote_result').html('');
+			if(postRating.value ) $j('.post .vote_result').html('');
+			if(commentRating.value) $j('.c_vote .vote_result').html('');
 			if(voteButtons.value) $j('.vote_button').remove();
+			if(d3.page.inbox){
+				$j('.post .vote_result').remove();
+				$j('.c_vote .vote_result').remove();
+				$j('.vote_button').remove();
+			}
 		}
 	}
 

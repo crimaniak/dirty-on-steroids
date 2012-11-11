@@ -2,8 +2,8 @@
 // ==UserScript==
 // @name			Dirty Modular SP
 // @author			crimaniak
-// @namespace		http://dirty.ru/
-// @description		Dirty Modular Service Pack. Core manage extensions settings and provide jQuery service.
+// @namespace			http://dirty.ru/
+// @description			Dirty Modular Service Pack. Core manage extensions settings and provide jQuery service.
 // @include			http://dirty.ru/*
 // @include			http://www.dirty.ru/*
 // @include			http://music.dirty.ru/*
@@ -18,6 +18,15 @@ var $j=jQuery.noConflict();	// $j closure used for jQuery to avoid conflict with
 var d3=
 {
 	modules: [],
+	/// Search module by name
+	getModule: function(name){
+		for(var i=0;i<this.modules.length;++i){
+				if(this.modules[i].name === name){
+					return this.modules[i];
+				}
+		}
+		return null;
+	},
 	user:
 	{
 		id: null,
@@ -51,6 +60,18 @@ var d3=
 
 	/// newElement('div',...) shortcut
 	newDiv: function(parms) { return this.newElement('div', parms); },
+
+	/// Local Storage get item with a default fallback (localStorGetItem from the old code) 
+	localStorageGetItem: function(itemName, defaultValue){
+		var loadedValue = localStorage.getItem( itemName );
+		if ( loadedValue == null )
+		{
+			loadedValue = defaultValue;
+		}
+		return loadedValue;
+	},
+	//shortcut for backward compability
+	localStorGetItem: function(itemName, defaultValue){this.localStorageGetItem(itemName, defaultValue);},
 	
 	/// Get element(s) of page
 	get:
@@ -116,9 +137,14 @@ var d3=
 		/// Draw one control sheet
 		drawSheet: function(data)
 		{
-			var html='<table><tbody><col width="24"></col>';
-			for(var id in data)
+			var html='<table style="width: 100%;"><tbody><col width="24"></col>';
+			for(var id in data){
+				if(data[id].name=='active'){
+					html += '<tr><td colspan="2" style="height: 20px;"><div style="padding-top:8px;"><div style="height: 1px; background-color: black;"><span style="background-color: white; position: relative; top: -0.8em; left: 20px;">Модуль "'+data[id].caption+'"</span></div></div></td></tr>';
+					data[id].caption = "Активировать";				
+				}
 				html+=data[id].draw();
+			}
 			return html+'</tbody></table>';
 		},
 		/// Control constructor

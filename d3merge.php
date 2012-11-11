@@ -5,7 +5,7 @@
 class d3merge
 {
 	const core='d3.template.js';
-	const output='result\\d3.user.js';
+	const output='result/d3.user.js';
 	
 	static public function run($arg)
 	{
@@ -44,10 +44,10 @@ class d3merge
 			$code=implode("==/UserScript==\n",$parts);
 		}
 		
-		file_put_contents(self::output,$code);
+		file_put_contents(realpath(self::output),$code);
 					
 		echo "done.\n";
-		echo "Now install ".self::output." script into your browser.\n";
+		echo "Now install ".realpath(self::output)." script into your browser.\n";
 	}
 }
 

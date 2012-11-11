@@ -4,7 +4,7 @@ d3.addModule(
 {
 	type: "Социализм",
 	name: 'Игноратор',
-	author: 'crimaniak',
+	author: 'crimaniak,Stasik0',
 	config: {active:{type:'checkbox',value:true}
 			,ignored:{type:'hidden',value:{}}
 			,hideAtAll:{type:'checkbox',value:true,caption:'скрывать посты совсем'}
@@ -45,7 +45,7 @@ d3.addModule(
 		if(this.config.ignored.value[id]!=undefined)
 			(this.config.hideAtAll.value  ? post.container : $j('div.dt',post.container)).hide();
 		
-		footer.append('&nbsp; <a class="ignorator" href="#" style="font-weight: bold">[x]</a>');
+		footer.append('&nbsp; <a class="ignorator" href="#" style="font-weight: bold">[игнорировать]</a>');
 		$j('.ignorator',footer).click(function(){return me.processClick(post);});
 	},
 	

@@ -9,6 +9,7 @@ core/comment.js
 core/content.js
 extra/tagline.links.js
 extra/right.navigator.js
+extra/mark.as.read.js
 extra/ignorator.js
 extra/quotes.js
 extra/hidden.author.js
@@ -22,5 +23,6 @@ extra/no.rating.js
 extra/browser.js
 extra/fotki.js
 extra/www.redirector.js
-extra/genderizer.js
 extra/test.js
+extra/online.user.js
+extra/dirty.tooltip.js

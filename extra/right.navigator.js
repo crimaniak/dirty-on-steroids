@@ -3,15 +3,19 @@ d3.addModule(
 {
 	type: "Навигация",
 	name: 'Навигация по новым',
-	author: 'crimaniak',
-	config: {active:{type:'checkbox',value:true}},
+	author: 'crimaniak, Stasik0',
+	config: {
+		active:{type:'checkbox',value:true},
+		smoothScroll:{type:'checkbox',value:true,caption:'Плавная прокрутка'}
+	},
 	newItems: [],
 	mineItems: [],
 	nextMine: null,
 	nextNew: null,
 	prevNew: null,
 	currentItem: null,
-	myScroll: false,
+	scrolling: false,
+	scrollDestination: 0,
 	run: function()
 	{
 		if(!this.countItems()) return;
@@ -20,7 +24,7 @@ d3.addModule(
 		
 		var me=this;
 		$j(window).scroll(function(event){me.onScroll();});
-		$j('#home').click(function(){$j(window).scrollTop(0);});
+		$j('#home').click(function(){me.scrollToPosition(0);});
 		$j('#down').click(function(){me.scrollToItem(me.newItems[me.nextNew]);});
 		$j('#up').click(function(){me.scrollToItem(me.newItems[me.prevNew]);});
 		$j('#mine').click(function(){me.scrollToItem(me.mineItems[me.nextMine]);});
@@ -33,11 +37,55 @@ d3.addModule(
 		
 		this.newPosition();
 	},
-	
+
+	scrollToPosition: function(position)
+	{
+		if(this.config.smoothScroll.value){
+			this.smoothScroll(position);
+		}else{
+			$j(window).scrollTop(
+				position
+			);
+			this.resetScrolling();
+		}
+	},
+
+	resetScrolling: function() {
+		this.scrolling = false;
+	},
+
+	smoothScroll: function(destination){
+		this.scrollDestination = destination;
+		this.scrolling = true;
+		this.scrollDeamon();
+	},
+
+	scrollDeamon: function(){
+		var destination = this.scrollDestination;
+		if(this.scrolling == false){
+			scrolling = false;
+			this.newPosition();
+			return;
+		}
+		current = $j(window).scrollTop();
+		distance = destination - current;
+		if ( Math.abs(distance) < 5 ) {
+			$j(window).scrollTop(destination);
+			this.resetScrolling();
+			this.newPosition();
+			return;
+		}
+		$j(window).scrollTop(
+			Math.round(current+(distance/4.5))
+		);
+		me = this;
+		window.setTimeout(function(){me.scrollDeamon(destination)}, 35);
+	},
+
+
 	countItems: function()
 	{
 		var items = d3.get.items();
-		
 		this.newItems=[];
 		this.mineItems=[];
 		// select new and mine items
@@ -55,11 +103,31 @@ d3.addModule(
 		this.newPosition();
 	},
 */	
+
+
+
 	scrollToItem: function(item)
 	{
+		var highlightColor = "#fff48d";
+		var colorToHex =  function(color) {
+		    if (color.substr(0, 1) === '#') {
+			return color;
+		    }
+		    if(color.substr(0, 3) !== "rgb"){
+			return "unknown";
+		    }
+		    var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
+		    
+		    var red = parseInt(digits[2]);
+		    var green = parseInt(digits[3]);
+		    var blue = parseInt(digits[4]);
+		    
+		    var rgb = blue | (green << 8) | (red << 16);
+		    return digits[1] + '#' + rgb.toString(16);
+		};
 		if(item==null) return false;
-		this.myScroll=true;
-		$j(window).scrollTop(Math.floor(item.offset().top+(item.height()-$j(window).height())/2));
+		this.scrolling=true;
+		this.scrollToPosition(Math.floor(item.offset().top+(item.height()-$j(window).height())/2));
 		this.currentItem=item;
 		this.newPosition();
 		/*
@@ -67,23 +135,31 @@ d3.addModule(
 		item.getContent().animate({opacity: 1},400);
 		*/
 		var content=item.container;
+		var inner = $j(".comment_inner", content);
+		if(inner != null){ //is it a comment? if yes get a nested element for a better highlighting
+			content = inner;
+		}
 		var oldColor=content.css('background-color');
+		if(colorToHex(oldColor) == highlightColor)return;
 		window.setTimeout(function(){content.css('background-color',oldColor);}, 650);
-		content.css('background-color',"#fff48d");
+		content.css('background-color',highlightColor);
 	},
 	
 	getCurrentOffset: function() {return this.currentItem ? this.currentItem.offset().top : $j(window).scrollTop()+$j(window).height()/2;},
 	
 	onScroll: function()
 	{
-		if(this.myScroll) this.myScroll=false;
-		else			this.currentItem=null;
+	
+		if(!this.scrolling){
+			this.currentItem=null;
+		}
 		this.newPosition();
 	},
 	
+
 	newPosition: function()
 	{
-		var offset=this.getCurrentOffset();
+		var offset = this.getCurrentOffset();
 		var height=$j(window).height();
 
 		for(var i=0; i< this.mineItems.length && this.mineItems[i].offset().top<=offset; ++i);
