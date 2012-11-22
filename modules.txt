@@ -25,3 +25,4 @@ extra/canonical.gertrudes.js
 extra/hotlinks.for.video.js
 extra/hide.inbox.users.js
 extra/dirty.tort.js
+extra/hide.posts.by.rating.js
