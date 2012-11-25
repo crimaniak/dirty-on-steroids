@@ -101,7 +101,11 @@ var d3=
 		if(module.config == undefined || module.config.active == undefined || module.config.active.value)
 		{
 			var timeBefore = new Date();
-			module.run();
+			try {
+				module.run();
+			} catch (e) {
+				if (console) console.log("Error in module '" + module.name + "'", e);
+			}
 			var moduleRunTime = (new Date()) - timeBefore;
 			this.runTimeTotal += moduleRunTime;
 			if(console)console.log( module.name + ": " + moduleRunTime + "ms" );
