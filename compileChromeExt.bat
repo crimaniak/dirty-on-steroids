@@ -1,1 +1,0 @@
-php build/buildChromeExtension.php %1

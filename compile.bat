@@ -1,1 +1,0 @@
-php build/d3merge.php %1
