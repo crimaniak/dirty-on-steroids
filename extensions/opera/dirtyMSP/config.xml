@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" id="https://github.com/crimaniak/dirty-on-steroids" version="0.1">
+<widget xmlns="http://www.w3.org/ns/widgets" id="https://github.com/crimaniak/dirty-on-steroids" version="@version@">
     <name xml:lang="en">Modular Service Pack for Dirty.ru</name>
     <name xml:lang="ru">Модульный Сервис Пак для Дёрти.ру</name>
     <description xml:lang="en">Modular Service Pack for d3.ru ( dirty.ru )</description>
