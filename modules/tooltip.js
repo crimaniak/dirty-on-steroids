@@ -125,8 +125,7 @@ d3.addModule(
 				var dup_text = data.replace(/(\r\n|\n|\r)/gm,' ').replace(/\s\s+/g,' ');
 				//splits are for better performance! :p
 				var dup_user_id = me.extractBetween(dup_text, "voteResultsHandler.showVoteResult('" ,"'");
-				var dup_user_name = obj.href.split('/');
-				dup_user_name = dup_user_name[dup_user_name.length-1];
+				var dup_user_name = me.extractBetween(dup_text, "class=\"b-user_name-link\">", "</a>");
 
 				var dateSpan = '<span class="js-date';
 				var dup_date = "неизвестно";
