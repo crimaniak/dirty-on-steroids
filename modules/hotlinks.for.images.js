@@ -35,7 +35,7 @@ d3.addModule(
 	{
 		document.body.style.cursor = 'wait';
 		var newImageForPreview = new Image();
-		newImageForPreview.src = e.target.href;
+		newImageForPreview.src = e.currentTarget.href;
 		var posx = 0;
 		var posy = 0;
 		if (!e) e = window.event;
@@ -52,17 +52,17 @@ d3.addModule(
 		$j(newImageForPreview).bind('load', {x: posx, y: posy}, function(e)
 		{
 			document.body.style.cursor = 'auto';
-			if ( e.target.complete )
+			if ( e.currentTarget.complete )
 			{
 				var data = e.data;
 				var imgPreview = document.createElement('img');
-				imgPreview.setAttribute('src', e.target.src );
-				var posy = data.y - (e.target.height / 2 );
+				imgPreview.setAttribute('src', e.currentTarget.src );
+				var posy = data.y - (e.currentTarget.height / 2 );
 				if (posy < d3.window.getScroll().y) 
 				{
 					posy = d3.window.getScroll().y;
 				}
-				var posx = data.x - (e.target.width /2 );
+				var posx = data.x - (e.currentTarget.width /2 );
 				if (posx < d3.window.getScroll().x) 
 				{
 					posx = d3.window.getScroll().x;
@@ -74,16 +74,16 @@ d3.addModule(
 
 				$j(imgPreview).bind('click', function(e)
 					{
-						e.target.parentNode.removeChild( e.target );
+						e.currentTarget.parentNode.removeChild( e.currentTarget );
 					});
 
    				var script = document.createElement( 'script' );
    				script.type = 'text/javascript';
-   				script.textContent ="morphingSp3( " + imgId + "," + posx  + "," + posy + "," + e.target.width + "," +  e.target.height + ");";
+   				script.textContent ="morphingSp3( " + imgId + "," + posx  + "," + posy + "," + e.currentTarget.width + "," +  e.currentTarget.height + ");";
 				document.body.appendChild( script );
 			}
 		});
-		$j(newImageForPreview).bind('error', {href: e.target.href}, function(e)
+		$j(newImageForPreview).bind('error', {href: e.currentTarget.href}, function(e)
 		{
 			document.body.style.cursor = 'auto';
 			window.location.href = e.data.href;
