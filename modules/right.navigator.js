@@ -7,6 +7,7 @@ d3.addModule(
 	config: {
 		active:{type:'checkbox',value:1, description:'С правой стороны страницы появляется дополнительный навигатор, пользуясь которым, Вы можете перемещаться только по новым комментарим, либо только по своим, а также отмотать страницу вверх.'},
 		smoothScroll:{type:'checkbox',value:1,caption:'Плавная прокрутка'}
+		,transparency:{type:'text',value:'0',caption:'Прозрачность: ', description:'Может быть полезна на маленьких разрешениях, когда текст может оказаться под навигатором. В процентах, 0 - 50'}
 	},
 	newItems: [],
 	mineItems: [],
@@ -267,8 +268,18 @@ d3.addModule(
 		
 	drawButtons: function()
 	{
+        var opacity = 1;
+        if (this.config.transparency.value) {
+            var transparency = parseInt(this.config.transparency.value);
+            if (transparency) {
+                opacity = 1 - transparency/100;
+                if (opacity < 0.5) {
+                    opacity = 0.5;
+                }
+            }
+        }
 		document.body.insertBefore(d3.newDiv(
-			{style:{position:'fixed',top:'50%',marginTop:'-72px',right:'1px',zIndex:'100'}
+			{style:{position:'fixed',top:'50%',marginTop:'-72px',right:'1px',zIndex:'100',opacity:opacity}
 			,innerHTML: '<div id="home" style="height:32px; width:32px; color:#ffffff; background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAALOzs////yH5BAAAAAAALAAAAAAgACAAAAIyhI+py+0Po5y02ouz3rx7GgSfEYZfWXYouq1r64qwy8WylgI5bur9CAwKh8Si8YhEFgAAOw==); cursor: pointer; cursor: hand; text-align:center; margin-bottom: 10px;"></div>'
             + '<div id="up" style="height:22px; width:32px; color:#ffffff; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAeNJREFUeNrsl8tLAlEYxeeOM1oGxSCW44tESJLEpJZFLoISol0PEPLPat+ibNFqIKhVD4QIatHWJ4YPCvNFWljZuTGIRY/RKDdz4DB831w5P787d2BIs9lkFIqFm7KptPitUK/Xa3q9vob6pe2eYnEdrKUBBNYg2FQoFJay2WwgnU7XXS7XkcViOQTINe4/yeuJfP0WinQwAbp2EMH+fD4fTKVSs+gNy0FF+MLtdu8CRNLpdLdKp6EEgAZoETyF4FAymZxHbYP5TyZUIIScejyeLVEUT3ieL8v9rgBoMF8sFkcx6lUEr6Aeg/t+AH6GcyzLHni93m2TyXSu0Wjuv5rIVwBsqVQSEbyYSCTWUU/DQ237qkQNOMlx3L7P59sxGo1XgHr8CEIBSHuzXC4PIXguHo8HUc7AI/TBY7rXAxy12+17ZrM5bDAYYtim1olpTaBSqWgRPBmLxUIoA7D1k33+jehRvXQ4HGGASIIg5OiJIdVqdSCTydii0egyGmvwONzP/I3oP7+Dz5xOZ9hqtR4TSZI20XDDE7DQ4T53K/qg3tCJ0BfRBqz75T53KpolwgsUQM/0ThzL9FgqgAqgAqgAKoAKoAKoAD0HaH2cNhqNfw3GZ9t7AL/f/68AkUjk7foqwACX9rDUyu2FOQAAAABJRU5ErkJggg==); cursor: pointer; cursor: hand; text-align:center; padding: 10px 0px 0px 0px; font-size: 90%; text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.75);">0</div>'
             + '<div id="mine" style="height:18px; width:32px; color:#ffffff; background-image: url(data:image/gif;base64,R0lGODlhIAAgAIAAALOzs////yH5BAAAAAAALAAAAAAgACAAAAIvhI+py+0Po1QhTFnrhdnup33ieHQk1XknkGYr26pn+9b2jef6zvf+DwwKh8QisAAAOw==); cursor: pointer; cursor: hand; text-align:center; padding: 14px 0px 0px 0px; font-size: 90%; text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.75);"></div>'
