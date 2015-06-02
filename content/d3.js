@@ -21,7 +21,7 @@ d3.addContentModule(/(.*\.)?d3.ru/i,
 		d3.page=
 		{
 			inbox: isInbox,
-			my: document.location.pathname.substr(0, 4) == "/my/" && !isInbox,
+			my: ($j("#js-profile_avatar_uploader_container").length > 0),
 			postComments: ($j(".b-post_article_comments").length > 0),
 			inboxComments: (( document.location.pathname.indexOf("/inbox/") > 0 ) && ( window.location.pathname.length > 15 )),
 			onlyNew: (document.location.href.indexOf('#new') > -1),
