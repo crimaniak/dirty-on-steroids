@@ -22,7 +22,7 @@ d3.addContentModule(/(.*\.)?d3.ru/i,
 		{
 			inbox: isInbox,
 			my: document.location.pathname.substr(0, 4) == "/my/" && !isInbox,
-			postComments: (window.location.pathname.indexOf("/comments/") >= 0),
+			postComments: ($j(".b-post_article_comments").length > 0),
 			inboxComments: (( document.location.pathname.indexOf("/inbox/") > 0 ) && ( window.location.pathname.length > 15 )),
 			onlyNew: (document.location.href.indexOf('#new') > -1),
 			user: (window.location.pathname.indexOf("/user/")>=0) || (window.location.pathname.indexOf("/users/")>=0)
