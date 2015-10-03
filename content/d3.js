@@ -1,5 +1,4 @@
 // content interface module for *.dirty.ru
-
 d3.addContentModule(/(.*\.)?dirty.ru/i,
 {
 	type: "Ядро",
@@ -97,7 +96,7 @@ d3.addContentModule(/(.*\.)?dirty.ru/i,
 		this.posts=[];
 		this.comments=[];
 		var me=this;
-		$j('.post').each(function () {
+		$j('.post:not(.b-related-posts_item)').each(function () {
 			me.countPost(new Post($j(this)));
 		});
 		$j('.comment').each(function () {
