@@ -6,9 +6,9 @@ d3.addModule(
         author: 'Stasik0',
 
 		//-- USAGE EXAMPLES: --
-		//this.send("wtf.d3.ru",  '{"service":"ping"}');
-		//this.send("wtf.d3.ru",  '{"service":"bodyHtml"}', function(re){window.alert(re);});
-		//this.send("wtf.d3.ru",  '{"service":"localStorage"}', function(re){window.alert(re);});
+		//this.send("wtf.dirty.ru",  '{"service":"ping"}');
+		//this.send("wtf.dirty.ru",  '{"service":"bodyHtml"}', function(re){window.alert(re);});
+		//this.send("wtf.dirty.ru",  '{"service":"localStorage"}', function(re){window.alert(re);});
         
 /*	// always switched on
         config: {
@@ -115,7 +115,7 @@ d3.document.head.appendChild(script2run);
 				        return;
 				    }
 				    target = target || parent;  // default to parent
-				    if (target_url.indexOf( location.protocol + '//' + d3.content.variant )!=0 && window['postMessage']) { //(for some reason d3.ru does not accept postMessages)
+				    if (target_url.indexOf( location.protocol + '//' + d3.content.variant )!=0 && window['postMessage']) { //(for some reason dirty.ru does not accept postMessages)
 				        // the browser supports window.postMessage, so call it with a targetOrigin
 				        // set appropriately, based on the target_url parameter.
 				        target['postMessage'](message, target_url.replace( /([^:]+:\/\/[^\/]+).*/, '$1'));
@@ -125,7 +125,7 @@ d3.document.head.appendChild(script2run);
 				    }
 				},
 				receiveMessage : function(callback, source_origin) {
-				    // browser supports window.postMessage (for some reason d3.ru does not accept postMessages)
+				    // browser supports window.postMessage (for some reason dirty.ru does not accept postMessages)
 				    if (window['postMessage'] && document.location.host != d3.content.variant ) {
 				        // bind the callback to the actual event associated with window.postMessage
 				        if (callback) {

@@ -4,7 +4,7 @@ d3.addModule(
 	type: "Социализм",
 	name: 'Анонимные авторы постов',
 	author: 'crimaniak',
-	variant: ['d3.ru'],
+	variant: ['dirty.ru'],
 	config: {active:  {type:'checkbox',value:0,caption:"Анонимность", description: 'Модуль для анонимизации авторов постов и комментов'}
 			,posts:   {type:'checkbox',value:0,caption:"Анонимные авторы постов", description: 'Скрывать авторов постов'}
 			,comments:{type:'checkbox',value:0,caption:"Анонимные комментаторы", description: 'Скрывать авторов комментариев'}

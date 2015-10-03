@@ -4,7 +4,7 @@ d3.addModule(
 	type: "Прочее",
 	name: 'Показываться онлайн через d3search',
 	author: 'crea7or, Stasik0',
-	variant: ['d3.ru'],
+	variant: ['dirty.ru'],
 	config: {active:{type:'checkbox',value:1}},
 
 	run: function()
@@ -19,11 +19,11 @@ d3.addModule(
 				{
 					var checkinsMarkup = localStorage.getItem('checkinsMarkup');
 					var newdiv = document.createElement('div');
-					if ( document.location.href.indexOf('d3.ru/users') > -1 || document.location.href.indexOf('d3.ru/blogs') > -1 )
+					if ( document.location.href.indexOf('dirty.ru/users') > -1 || document.location.href.indexOf('dirty.ru/blogs') > -1 )
 					{
 						newdiv.setAttribute('style', 'margin-top: 300px;');
 					}
-					var fixdomain = checkinsMarkup.replace(/\/user/g, location.protocol + '//d3.ru/user');
+					var fixdomain = checkinsMarkup.replace(/\/user/g, location.protocol + '//dirty.ru/user');
 					newdiv.innerHTML =  fixdomain;
 					divContentLeft.appendChild( newdiv );
 					var module = d3.getModule("Dirty tooltip");

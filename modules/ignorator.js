@@ -5,7 +5,7 @@ d3.addModule(
 	type: "Социализм",
 	name: 'Игноратор',
 	author: 'crimaniak,Stasik0',
-	variant: ['d3.ru'],
+	variant: ['dirty.ru'],
 	config: {active:{type:'checkbox',value:1, description: 'Рядом с постами появляется кнопка [скрыть]. Нажав на нее, Вы можете скрыть пост совсем или минимизировать до полоски статуса.'}
 			,ignored:{type:'hidden',value:{}}
 			,confirmation:{type:'checkbox',value:1,caption: 'спрашивать подтверждение при сокрытии'}

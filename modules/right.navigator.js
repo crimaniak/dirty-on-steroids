@@ -165,7 +165,7 @@ d3.addModule(
 		var content=item.container;
 
 		var inner;
-		if ( d3.content.variant == "d3.ru")
+		if ( d3.content.variant == "dirty.ru")
 		{
 			inner = $j(".comment_inner", content);
 		}

@@ -1,11 +1,11 @@
-// content interface module for *.d3.ru
+// content interface module for *.dirty.ru
 
-d3.addContentModule(/(.*\.)?d3.ru/i,
+d3.addContentModule(/(.*\.)?dirty.ru/i,
 {
 	type: "Ядро",
 	author: 'crimaniak',
-	name: 'Интерфейс к содержимому d3.ru',
-	variant: 'd3.ru',
+	name: 'Интерфейс к содержимому dirty.ru',
+	variant: 'dirty.ru',
 	posts: [],
 	comments: [],
 	commentListeners: [],
@@ -16,7 +16,6 @@ d3.addContentModule(/(.*\.)?d3.ru/i,
 
 	run: function()
 	{
-
 		var isInbox = document.location.pathname.substr(0,10)=="/my/inbox/";
 		d3.page=
 		{

@@ -6,7 +6,7 @@ d3.addModule(
 	config: {active:{type:'checkbox',value:false, description:'Позволяет просмотреть все комментарии о вас от других пользователей (если у вас есть Gold d3 - появится ссылка "Читать всё")'}
 			},
     threshold: 0,
-    variant: ['d3.ru'],
+    variant: ['dirty.ru'],
     notes_array:[],
     current_note : '',
     started : false,

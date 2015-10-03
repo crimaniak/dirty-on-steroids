@@ -6,7 +6,7 @@ d3.addModule(
 		author: 'Aivean',
 		newUsers: 0,
 		oldUsers: 0,
-		variant: ['d3.ru','leprosorium.ru'],
+		variant: ['dirty.ru','leprosorium.ru'],
 		config: {
 			active: {type: 'checkbox', value: 0},
 			oldskool: {type: 'checkbox', caption: 'Показывать олдскульность поста', value: 0},
