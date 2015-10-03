@@ -4,12 +4,12 @@ d3.addModule(
 		type: "Содержание",
 		name: 'Скрывать посты на Украинском',
 		author: 'Stasik0',
-		variant: ['d3.ru'],
+		variant: ['dirty.ru'],
 		config: {
 			active: {type: 'checkbox', value: 0},
 		},
 
-		//tnx to arkony for regexps (servicepack.d3.ru/comments/522252/)
+		//tnx to arkony for regexps (servicepack.dirty.ru/comments/522252/)
 		rus: /[ыэъ]/i,
 		ukr: /[єіїґ'’]/i,
 

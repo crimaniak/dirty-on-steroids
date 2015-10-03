@@ -4,7 +4,7 @@ d3.addModule(
 		type: "Стилизация",
 		name: 'Выделять ссылки на подсайты в постах',
 		author: 'Aivean',
-		variant: ['d3.ru'],		
+		variant: ['dirty.ru'],		
 		config: {
 			active: {type: 'checkbox', value: 1},
 			style: {
@@ -31,7 +31,7 @@ d3.addModule(
 			var linksInInfo = post.info.get(0).getElementsByTagName('a');
 			if (linksInInfo && linksInInfo.length > 1) {
 				var href = linksInInfo[1].href;
-				if (href.endsWith(".d3.ru/new") || href.endsWith(".d3.ru/") || href.endsWith(".d3.ru")) {
+				if (href.endsWith(".dirty.ru/new") || href.endsWith(".dirty.ru/") || href.endsWith(".dirty.ru")) {
 					linksInInfo[1].setAttribute('style', this.styles[this.config.style.value]);
 				}
 			}

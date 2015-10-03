@@ -4,7 +4,7 @@ d3.addModule(
 	type: "Стилизация",
 	name: 'Рестайлинг сайта от dirty tort',
 	author: 'crea7or',
-	variant: ['d3.ru'],
+	variant: ['dirty.ru'],
 	config: {
 		active:{type:'checkbox',value:1}
 		,postInfoMove:{type:'checkbox',caption:'Информация о посте внизу',value:1}
@@ -25,6 +25,8 @@ d3.addModule(
 				var postParent = postInfo.parentNode;
 				postParent.removeChild( postInfo );
 				postParent.appendChild( postInfo );
+                // as some posts gets broke - too wide title and too narrow image+text in right column
+                $j('.post .dt .post_body').css({overflow: "visible"});
 			}
 		}
 

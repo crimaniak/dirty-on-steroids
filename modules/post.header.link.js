@@ -4,7 +4,7 @@ d3.addModule(
 	type: "Содержание",
 	name: 'Показывать внешние ссылки из заголовков постов',
 	author: 'crea7or',
-	variant: ['d3.ru'],
+	variant: ['dirty.ru'],
 	config: {active:{type:'checkbox',value:1}
 			,headerToComments:{type:'checkbox',caption:'Ссылка заголовка на комментарии',value:0}
 	},
@@ -22,7 +22,7 @@ d3.addModule(
 				if (headerLinks.length == 1) 
 				{
 					var d3link = true;
-					if ( headerLinks[0].href.indexOf('d3.ru/comments/') == -1 ) 
+					if ( headerLinks[0].href.indexOf('dirty.ru/comments/') == -1 ) 
 					{
 						d3link = false;
 					}
@@ -57,7 +57,7 @@ d3.addModule(
 								{
 									for ( var c = 0; c < linksInInfo.length; c++)
 									{										
-										if ( linksInInfo[c].href.indexOf("d3.ru/comments/") > -1 )
+										if ( linksInInfo[c].href.indexOf("dirty.ru/comments/") > -1 )
 										{
 											linkToPost = linksInInfo[c].href;
 											break;

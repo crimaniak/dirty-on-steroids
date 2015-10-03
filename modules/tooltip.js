@@ -14,7 +14,7 @@ d3.addModule(
 	type: "Прочее",
 	name: 'Dirty tooltip',
 	author: 'NickJr, Stasik0, and the rest of gang',
-	variant: ['d3.ru'],
+	variant: ['dirty.ru'],
 	config: {
 		active:{type:'checkbox',value:1},
 		useImages:{type:'checkbox',value:1,caption:'Картинки для tooltip'}
@@ -39,7 +39,7 @@ d3.addModule(
 		if(!this.config.active.value)return;
 		var me = this;
 		var links = $j('a[href*="/user/"]', elem);
-		var pattern = /(.*)d3.ru\/user\/(.+)/g;
+		var pattern = /(.*)dirty.ru\/user\/(.+)/g;
 		for(var i=0; i<links.length; i++){
 			var href = links[i].href.toString();
 			pattern.lastIndex = 0;
@@ -118,7 +118,7 @@ d3.addModule(
 
 	//high level wrapper for ajax get supporting XS
 	get: function(url, callback){
-		if(document.location.host == 'd3.ru'){
+		if(document.location.host == 'dirty.ru'){
 			$j.get(url, callback);
 		}else{
 			var module = d3.getModule("XD");
@@ -193,7 +193,7 @@ d3.addModule(
 					}
 				}
 
-				var profile_link_opening = ' <a href="http://d3.ru/user/';
+				var profile_link_opening = ' <a href="http://dirty.ru/user/';
 
 				dup_output = '<table cellspacing="0" cellpadding="0" border="0"><tr>'
 				 + '<td valign="top" style="padding-right:10px;"><div style="float:left;margin-bottom:5px">'+dup_name+'<br><span style="font-size:10px"><b>'+dup_country+'</b></span></div>'
@@ -202,7 +202,7 @@ d3.addModule(
 				    + (dup_comments ? profile_link_opening + dup_user_name + '"<b>' + dup_comments + '</b> ' + (dup_comments % 10 == 1 && dup_comments % 100 != 11 ? 'комментария':'комментариев') + '</a>' : '') 
 				    + '<br>Всего подписчиков: ' + dup_subscribers 
 				 + '</div>'
-				 + '<div style="margin-top:10px">'+dup_votes_him+'</div><div id="dup_my_vote"></div><div id="dup_his_vote"></div><div style="margin-top:10px">'+dup_note+'</div></td><td align="center" valign="top" style="padding-left:10px; border-left:1px #ccc solid;"><span style="color:#444">№'+dup_user_id+'</span><br>'+dup_parent.replace('<a href="/','<a href="http://d3.ru/') +'<div style="margin-top:10px;font-size:10px"><b>Регистрация:</b><br>'+dup_date+'</div><div style="margin-top:5px; font-size: 130%;"><b>Карма: <span style="color:'+((dup_karma>=0)?'green':'red')+'">'+dup_karma+'</span></b></div></td></tr></table>';
+				 + '<div style="margin-top:10px">'+dup_votes_him+'</div><div id="dup_my_vote"></div><div id="dup_his_vote"></div><div style="margin-top:10px">'+dup_note+'</div></td><td align="center" valign="top" style="padding-left:10px; border-left:1px #ccc solid;"><span style="color:#444">№'+dup_user_id+'</span><br>'+dup_parent.replace('<a href="/','<a href="http://dirty.ru/') +'<div style="margin-top:10px;font-size:10px"><b>Регистрация:</b><br>'+dup_date+'</div><div style="margin-top:5px; font-size: 130%;"><b>Карма: <span style="color:'+((dup_karma>=0)?'green':'red')+'">'+dup_karma+'</span></b></div></td></tr></table>';
 
 				$j('#dup_current_id').val(obj.href);
 				//FIXME: get incoming votes				

@@ -1,12 +1,12 @@
 {
-	"name": "d3.ru/leprosorium.ru service pack 3",
+	"name": "dirty.ru/leprosorium.ru service pack 3",
 	"version": "3.0.65.3",
-	"description": "Модульный сервис пак для сайтов d3.ru/leprosorium.ru",
+	"description": "Модульный сервис пак для сайтов dirty.ru/leprosorium.ru",
 	"manifest_version": 2,
 	"content_scripts": 
 	[
 		{
-			"matches": ["http://*.d3.ru/*", "http://*.leprosorium.ru/*"], 
+			"matches": ["http://*.dirty.ru/*", "http://*.leprosorium.ru/*"],
 			"js": ["d3.loader.user.js"],
 			"run_at": "document_end"
 		}

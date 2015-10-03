@@ -32,3 +32,4 @@ comments.threshold.js
 ukrhide.js
 archive.js
 comments.counter.lepra.js
+things.about.yourself.js

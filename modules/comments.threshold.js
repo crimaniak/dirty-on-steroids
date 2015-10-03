@@ -12,7 +12,7 @@ d3.addModule(
             ,alwaysShowRepliesToMe:{type:'checkbox',value :true,caption:'Не скрывать ответы мне', description:'Всегда показывать ответы на ваши комментарии. Ваши комментарии показываются всегда.'}
 			},
     threshold: 0,
-    variant: ['d3.ru'],
+    variant: ['dirty.ru'],
     select:null,
     min_rating:0,
     max_rating:0,
