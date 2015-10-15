@@ -20,10 +20,13 @@ d3.addModule(
 		},
 
 		mark: function(user, userId) {
-			switch(this.styleInt) {
-				case 0 : user.after(" <sup>*</sup>"); break;
-				case 1 : user.after(" <sup>" + userId + "</sup>"); break;
-				case 2 :  user.after(" <span style='padding-left:0.5em;'> | " + userId + "</span>"); break;
+			if (!user.data('marked')) {
+				switch (this.styleInt) {
+					case 0 : user.after(" <sup>*</sup>"); break;
+					case 1 : user.after(" <sup>" + userId + "</sup>"); break;
+					case 2 : user.after(" <span style='padding-left:0.5em;'> | " + userId + "</span>"); break;
+				}
+				user.data('marked', true);
 			}
 		},
 
