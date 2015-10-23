@@ -12,7 +12,7 @@ d3.addModule(
             ,alwaysShowRepliesToMe:{type:'checkbox',value :true,caption:'Не скрывать ответы мне', description:'Всегда показывать ответы на ваши комментарии. Ваши комментарии показываются всегда.'}
 			},
     threshold: 0,
-    variant: ['dirty.ru'],
+    variant: ['dirty.ru','leprosorium.ru'],
     select:null,
     min_rating:0,
     max_rating:0,
@@ -51,8 +51,11 @@ d3.addModule(
         displaySelect: function()
         {
             var me = this;
-            var header_div = $j("div.b-comments_controls_new_nav");
-
+            if (d3.content.variant == "dirty.ru") {
+                var header_div = $j("div.b-comments_controls_new_nav");
+            } else {
+                var header_div = $j("div.b-comments_controls");
+            }
             var select_div = $j('<div id="advansed_treshhold_div" style="display:inline;margin-left:5px;margin-right:5px;"></div>');
             this.select  = $j('<select id="advansed_treshhold" style="width:180px;"></select>');
             select_div.append(this.select);
