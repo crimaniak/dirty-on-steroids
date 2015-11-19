@@ -24,7 +24,8 @@ Post.prototype=new Item
 	{
 		with(this.container.style) if(display=='') display='none'; else display='';
 		return false;
-	}
+	},
+    commentsCount: function(){return parseInt(this.container.find(".b-post_comments_links a:first").text(), 10);}
 });
 
 d3.Post=Post;
