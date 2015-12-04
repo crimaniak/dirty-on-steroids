@@ -29,6 +29,7 @@ user.id.js
 mark.as.read.js
 online.user.js
 comments.threshold.js
+posts.threshold.js
 ukrhide.js
 archive.js
 comments.counter.lepra.js
