@@ -4,7 +4,7 @@ d3.addModule(
 	type: "Содержание",
 	name: 'Порог постов',
 	author: 'bearoff',
-	config: {active:{type:'checkbox',value:false, description:'Добавляет выпадающий список, который позволяет скрывать посты с низким рейтингом и небольшим количеством комментариев. Рейтинги в списке хитро рассчитываются каждый раз заново. Не влияет на динамически подгруженные посты (по кнопке "ещё посты")'}
+	config: {active:{type:'checkbox',value:false, description:'Добавляет выпадающий список, который позволяет скрывать посты с низким рейтингом и небольшим количеством комментариев. Рейтинги в списке хитро рассчитываются каждый раз заново. Не влияет на динамически подгруженные посты (по кнопке "ещё посты"). Посты со спрятанным рейтингом всегда показываются.'}
             ,optionsCount:{type:'text',value:'6',caption:'Количество опций: ',description:'Cколько опций будет в ниспадающем меню. Когда комментариев в посте мало, опций может быть меньше, чем это значение.'}
             ,defaultOption:{type:'text',value:'0',caption:'Опция по умолчанию: ', description:'Какая опция применится сразу после того, как вы откроете главную.'}
             ,checkComments:{type:'checkbox',value:false,caption:'Учитывать комментарии', description:'Не скрывать посты с бОльшим, чем указано, количеством комментариев'}
@@ -20,10 +20,11 @@ d3.addModule(
     select_properties:{thresholds:[], selected_strings:[],counts:[]},
     sorted_posts:{},
     always_visible_count:0,
+    hidden_rating_count:0,
     my_posts:{},
         run: function()
         {
-            if (!d3.content.posts.length || d3.page.user) {
+            if (!d3.content.posts.length || d3.page.user || d3.page.f_search) {
                 return false;
             }
 
@@ -48,10 +49,14 @@ d3.addModule(
         displaySelect: function()
         {
             var comments_part = '';
-            var select_width = '130';
+            var select_width = 130;
             if (this.config.checkComments.value) {
                 comments_part = ' или ' + this.config.commentsCount.value + ' комм.';
-                select_width = '210';
+                select_width = 210;
+            }
+
+            if (this.hidden_rating_count) {
+                select_width = select_width + 30;
             }
             var me = this;
             var header_div = $j(".b-blog_nav_sort");
@@ -62,7 +67,8 @@ d3.addModule(
 
             for (var i=0; i<this.select_properties.thresholds.length;i++) {
                 var visible_count = this.always_visible_count + this.select_properties.counts[i];
-                var option_title = i+': Рейт ' + this.select_properties.thresholds[i] + comments_part + " (" + visible_count + ")";
+                var hidden_part = this.hidden_rating_count ? ('+' + this.hidden_rating_count) : '';
+                var option_title = i+': Рейт ' + this.select_properties.thresholds[i] + comments_part + " (" + visible_count + hidden_part + ")";
                 var option = $j('<option id="advthresh_'+i
                                     + '" value="'+this.select_properties.thresholds[i]
                                     + '" '+this.select_properties.selected_strings[i]+'>'
@@ -161,9 +167,15 @@ d3.addModule(
                 this.my_posts[post.id] = post.id;
                 return true;
             }
-            if (post.ratingValue() >= this.threshold) {
+            var rating = post.ratingValue();
+            if (rating === null) {
+                this.hidden_rating_count++;
                 return true;
             }
+            if (rating >= this.threshold) {
+                return true;
+            }
+
             if (this.config.checkComments.value && post.commentsCount() >= this.config.commentsCount.value) {
                 return true;
             }

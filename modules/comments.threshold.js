@@ -3,7 +3,7 @@ d3.addModule(
 	type: "Содержание",
 	name: 'Порог комментариев',
 	author: 'bearoff',
-	config: {active:{type:'checkbox',value:true, description:'Добавляет выпадающий список, который позволяет скрывать комментарии с низким рейтингом. Рейтинги в списке хитро рассчитываются для каждого поста индивидуально.'}
+	config: {active:{type:'checkbox',value:true, description:'Добавляет выпадающий список, который позволяет скрывать комментарии с низким рейтингом. Рейтинги в списке хитро рассчитываются для каждого поста индивидуально. Комментарии со спрятанным рейтингом показываются всегда.'}
             ,beFast:{type:'checkbox',value:false,caption:'Работать очень быстро (кнопка "новые" не будет работать)', description:'Самая важная опция. Быстрый способ работает на порядок быстрее, чем медленный. Это становится заметно в постах от сотни комментариев. Однако быстрый способ ломает кнопки _все комментарии_/_новые_. Если для вас это не критично — смело используйте эту опцию.'}
             ,optionsCount:{type:'text',value:'6',caption:'Количество опций: ',description:'Cколько опций будет в ниспадающем меню. Когда комментариев в посте мало, опций может быть меньше, чем это значение.'}
             ,defaultOption:{type:'text',value:'0',caption:'Опция по умолчанию: ', description:'Какая опция применится сразу после того, как вы откроете пост.'}
@@ -20,6 +20,7 @@ d3.addModule(
     select_properties:{thresholds:[], selected_strings:[],counts:[]},
     sorted_comments:{},
     always_visible_count:0,
+    hidden_rating_count:0,
     my_comments:{},
         run: function()
         {
@@ -57,13 +58,15 @@ d3.addModule(
                 var header_div = $j("div.b-comments_controls");
             }
             var select_div = $j('<div id="advansed_treshhold_div" style="display:inline;margin-left:5px;margin-right:5px;"></div>');
-            this.select  = $j('<select id="advansed_treshhold" style="width:180px;"></select>');
+            var select_width = this.hidden_rating_count ? 200 : 180;
+            this.select  = $j('<select id="advansed_treshhold" style="width:' + select_width + 'px;"></select>');
             select_div.append(this.select);
             header_div.append(select_div);
 
             for (var i=0; i<this.select_properties.thresholds.length;i++) {
                 var visible_count = this.always_visible_count + this.select_properties.counts[i];
-                var option_title = i+': Больше ' + this.select_properties.thresholds[i] + " (" + visible_count + ")";
+                var hidden_part = this.hidden_rating_count ? ('+' + this.hidden_rating_count) : '';
+                var option_title = i+': Больше ' + this.select_properties.thresholds[i] + " (" + visible_count + hidden_part + ")";
                 var option = $j('<option id="advthresh_'+i
                                     + '" value="'+this.select_properties.thresholds[i]
                                     + '" '+this.select_properties.selected_strings[i]+'>'
@@ -180,7 +183,12 @@ d3.addModule(
                 this.always_visible_count++;
                 return true;
             }
-            if (comment.ratingValue() >= this.threshold) {
+            var rating = comment.ratingValue();
+            if (rating === null) {
+                this.hidden_rating_count++;
+                return true;
+            }
+            if (rating >= this.threshold) {
                 return true;
             }
             return false;

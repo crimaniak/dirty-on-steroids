@@ -23,7 +23,8 @@ d3.addContentModule(/(.*\.)?dirty.ru/i,
 			postComments: ($j(".b-post_article_comments").length > 0),
 			inboxComments: (( document.location.pathname.indexOf("/inbox/") > 0 ) && ( window.location.pathname.length > 15 )),
 			onlyNew: (document.location.href.indexOf('#new') > -1),
-			user: (window.location.pathname.indexOf("/user/")>=0) || (window.location.pathname.indexOf("/users/")>=0)
+			user: (window.location.pathname.indexOf("/user/")>=0) || (window.location.pathname.indexOf("/users/")>=0),
+			f_search: (window.location.pathname.indexOf("/search/")>=0)
 		};
 		/// Get element(s) of page
 		d3.get =
