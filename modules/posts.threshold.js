@@ -24,7 +24,7 @@ d3.addModule(
     my_posts:{},
         run: function()
         {
-            if (!d3.content.posts.length || d3.page.user) {
+            if (!d3.content.posts.length || d3.page.user || d3.page.f_search) {
                 return false;
             }
 
