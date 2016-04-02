@@ -65,8 +65,11 @@ d3.addModule(
 
             for (var i=0; i<this.select_properties.thresholds.length;i++) {
                 var visible_count = this.always_visible_count + this.select_properties.counts[i];
-                var hidden_part = this.hidden_rating_count ? ('+' + this.hidden_rating_count) : '';
-                var option_title = i+': Больше ' + this.select_properties.thresholds[i] + " (" + visible_count + hidden_part + ")";
+                var hidden_part = this.hidden_rating_count ? (this.hidden_rating_count + '+') : '';
+                if (this.hidden_rating_count) {
+                    visible_count = visible_count - this.hidden_rating_count;
+                }
+                var option_title = i+': Больше ' + this.select_properties.thresholds[i] + " (" + hidden_part + visible_count +  ")";
                 var option = $j('<option id="advthresh_'+i
                                     + '" value="'+this.select_properties.thresholds[i]
                                     + '" '+this.select_properties.selected_strings[i]+'>'
