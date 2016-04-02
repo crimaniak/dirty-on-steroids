@@ -25,7 +25,7 @@ d3.addModule(
 
 	onPost: function(post)
 	{
-		if (d3.content.comments.length == 0) { // main page //TODO replace this with user location in d3.content issue #31
+		if (d3.content.comments.length == 0 && !d3.page.user) { // main page //TODO replace this with user location in d3.content issue #31
 			var footer = post.getFooter();
 			var me = this;
 			var id = '' + post.id;
