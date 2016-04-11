@@ -83,18 +83,35 @@ d3.addModule(
                 });
         },
 
-        fixParentLink: function(parentLink, parent) {
+        showWithParents: function(comment_container) {
+            comment_container.show();
+            var parent_id = comment_container.attr("data-parent_comment_id");
+            if (!parent_id) {
+                return;
+            }
+            var parent = $j("#"+parent_id);
+            this.showWithParents(parent);
+        },
+
+        fixParentLink: function(comment) {
+            if (!comment.parentId) {
+                return;
+            }
+            var parentLink = $j(".c_parent", comment.container);
+            var parent = $j("#"+comment.parentId);
+            var me = this;
             parentLink.click(function(){
-                parent.show();
+                me.showWithParents(parent);
             });
         },
         
         getStats: function()
         {
             for (var i=0; i<d3.content.comments.length; i++) {
-                var rating = parseInt(d3.content.comments[i].ratingValue());
-                if (isNaN(rating)) {
-                    // this comment seems to be deleted
+                var rating = d3.content.comments[i].ratingValue();
+                this.fixParentLink(d3.content.comments[i]);
+                if (isNaN(rating) || null === rating) {
+                    // may be deleted or with hidden rating
                     continue;
                 }
                 if (this.sorted_comments[rating]===undefined) {
@@ -107,10 +124,6 @@ d3.addModule(
                 }
                 if (this.max_rating < rating) {
                     this.max_rating = rating;
-                }
-                if (d3.content.comments[i].parentId!==undefined) {
-                    var parent = $j("#"+d3.content.comments[i].parentId);
-                    this.fixParentLink($j(".c_parent", d3.content.comments[i].container), parent);
                 }
             }
         },
