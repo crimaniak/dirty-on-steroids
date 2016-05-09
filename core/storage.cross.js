@@ -6,7 +6,7 @@ d3.storage =
 	{
 		try
 		{
-			var value = $j.cookie(key);
+			var value = d3.cookie(key);
 			if (value !== null)
 				return d3.json.decode(value);
 		} catch(e){}
@@ -19,7 +19,7 @@ d3.storage =
 			if (console) console.log("Trying to save invalid cookie! ", value);
 			return;
 		}
-		return $j.cookie(key, d3.json.encode(value), {domain: '.' + d3.content.variant, path:'/', expires: 365});
+		return d3.cookie(key, d3.json.encode(value), {domain: '.' + d3.content.variant, path:'/', expires: 365});
 	},
 	remove: function(key)
 	{
